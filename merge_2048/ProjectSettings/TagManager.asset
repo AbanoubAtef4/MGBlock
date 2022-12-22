@@ -6,6 +6,9 @@ TagManager:
   tags:
   - block
   - sound
+  - score
+  - yourscore
+  - loser
   layers:
   - Default
   - TransparentFX

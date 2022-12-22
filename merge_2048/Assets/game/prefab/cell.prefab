@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -90,13 +90,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taken: 0
-  up: {fileID: 0}
-  right: {fileID: 0}
-  down: {fileID: 0}
-  left: {fileID: 0}
-  upbtn: {fileID: 6208210871631364962, guid: 9f321abb9e32e38458e6eb1866ab6f2d, type: 3}
-  rightbtn: {fileID: 6208210871631364962, guid: 9f321abb9e32e38458e6eb1866ab6f2d, type: 3}
-  downbtn: {fileID: 6208210871631364962, guid: 9f321abb9e32e38458e6eb1866ab6f2d, type: 3}
-  leftbtn: {fileID: 6208210871631364962, guid: 9f321abb9e32e38458e6eb1866ab6f2d, type: 3}
   currentblock: {fileID: 6208210871631364962, guid: 9f321abb9e32e38458e6eb1866ab6f2d, type: 3}
   currentcell: {fileID: -6113302862369138693}

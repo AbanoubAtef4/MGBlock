@@ -9,6 +9,8 @@ using UnityEngine.UI;
 using TMPro;
 public class GameManager : MonoBehaviour
 {
+    public TMP_Text high;
+
     public TMP_Text _score;
     public int _width = 6;
     public int _height = 8;
@@ -16,37 +18,90 @@ public class GameManager : MonoBehaviour
     public bool[] isfree;
     public Transform[,] _cellposlist;
     public GameObject blockprefab;
-    public float Score=0;
-    public float highscore = 0;
+    public static float Score=0;
     public bool finish;
-    ButtonScript sc;
     public GameObject win;
-    public TMP_Text high;
-    public AudioSource end;
+    public AudioClip endwin;
+    public AudioClip endlose;
 
     int z = 0;
-
-
+    public GameObject[] numcube;
+    public GameObject btn;
+    public GameObject btn2;
+    bool winsound=true;
+    bool losesound = true;
+    public GameObject lose;
     void Start()
     {
-
-        GetPosCell(24);
-        end = GetComponent<AudioSource>();
+        GetPosCell(0,8);
     }
 
     private void Update()
     {
-        _score.text ="Score : " + Score.ToString();
-        if (finish)
+        
+        if (finish )
         {
-            end.Play();
-            high.text = "Your Score : " + Score.ToString();
+            if (ButtonScript.Score > ButtonScript.highscore)
+            {
+                ButtonScript.highscore = ButtonScript.Score;
+                Debug.Log(Score);
+            }
+            Debug.Log("Main : " + Score);
+            Time.timeScale = 0;
+            win.transform.SetAsLastSibling();
             win.SetActive(true);
+            if (winsound)
+            {
+                GetComponent<AudioSource>().PlayOneShot(endwin);
+                winsound = false;
+            }
+            
+
+            high = GameObject.FindGameObjectWithTag("yourscore").GetComponent<TextMeshProUGUI>();
+            high.text = "Your Score : " + ButtonScript.Score;
+            PlayerPrefs.SetInt("highsc", ButtonScript.highscore);
+
+            btn.SetActive(false);
+            btn2.SetActive(false);
+
+
         }
+        else if (numcube.Length > 40 || ButtonScript.loser)
+        {
+            if (ButtonScript.Score > ButtonScript.highscore)
+            {
+                ButtonScript.highscore = ButtonScript.Score;
+                Debug.Log(Score);
+            }
+            Debug.Log("Main : " + Score);
+            Time.timeScale = 0;
+            lose.transform.SetAsLastSibling();
+            lose.SetActive(true);
+            if (losesound)
+            {
+                GetComponent<AudioSource>().PlayOneShot(endlose);
+                losesound = false;
+            }
+
+
+            high = GameObject.FindGameObjectWithTag("yourscore").GetComponent<TextMeshProUGUI>();
+            high.text = "Your Score : " + ButtonScript.Score;
+            PlayerPrefs.SetInt("highsc",ButtonScript.highscore);
+
+            btn.SetActive(false);
+            btn2.SetActive(false);
+            ButtonScript.loser = false;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+
+        numcube = GameObject.FindGameObjectsWithTag("block");
     }
 
 
-    public void GetPosCell(int value)
+    public void GetPosCell(int start,int value)
     {
         
         
@@ -56,47 +111,47 @@ public class GameManager : MonoBehaviour
 
 
         
-        for (int i = 0; i < value; i++)
+        for (int i = start; i < value; i++)
         {
                 float rand = Random.value;
                 
                 GameObject block = Instantiate(blockprefab, cellposarray[i]);
                 block.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
-                if (rand <= 0.1f)
+                if (rand <= 0.15f)
                 {
                     block.GetComponentInChildren<TextMeshProUGUI>().text = "2";
                     block.GetComponent<Image>().color = Color.red;
 ;
 
                 }
-                else if (rand <= 0.2f)
+                else if (rand <= 0.3f)
                 {
                     block.GetComponentInChildren<TextMeshProUGUI>().text = "4";
                     block.GetComponent<Image>().color = Color.green;
 
                 }
-                else if (rand <= 0.3f)
+                else if (rand <= 0.45f)
                 {
                     block.GetComponentInChildren<TextMeshProUGUI>().text = "8";
                     block.GetComponent<Image>().color = Color.blue;
                 }
-                else if (rand <= 0.4f)
+                else if (rand <= 0.6f)
                 {
                     block.GetComponentInChildren<TextMeshProUGUI>().text = "16";
 
                     block.GetComponent<Image>().color = Color.cyan;
                 }
-                else if (rand <= 0.5f)
+                else if (rand <= 0.75f)
                 {
                     block.GetComponentInChildren<TextMeshProUGUI>().text = "32";
                     block.GetComponent<Image>().color = Color.white;
                 }
-                else if (rand <= 0.6f)
+                else
                 {
                     block.GetComponentInChildren<TextMeshProUGUI>().text = "64";
                     block.GetComponent<Image>().color = Color.magenta;
                 }
-                else if (rand <= 0.7f)
+               /* else if (rand <= 0.7f)
                 {
                     block.GetComponentInChildren<TextMeshProUGUI>().text = "128";
                     block.GetComponent<Image>().color = Color.gray;
@@ -110,12 +165,12 @@ public class GameManager : MonoBehaviour
                 {
                     block.GetComponentInChildren<TextMeshProUGUI>().text = "512";
                     block.GetComponent<Image>().color = Color.black;
-                }
-                else
+                }*/
+                /*else
                 {
-                block.GetComponentInChildren<TextMeshProUGUI>().text = "1024";
+                block.GetComponentInChildren<TextMeshProUGUI>().text = "128";
                 block.GetComponent<Image>().color = Color.gray;
-                }
+                }*/
         }
     }
 
@@ -123,6 +178,10 @@ public class GameManager : MonoBehaviour
     {
         Score += value;
         finish = end;
-
+    }
+    public void newblocks()
+    {
+            GetPosCell(40,48);
+               
     }
 }

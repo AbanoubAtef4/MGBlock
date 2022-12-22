@@ -73,7 +73,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e4626eb40ab772442a43ffea44938595, type: 3}
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -96,8 +96,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txt: {fileID: 3302422211060961083}
-  highscore: 0
-  merge: {fileID: -4961696958138471385}
+  totalScore: {fileID: 0}
+  merge: {fileID: 8300000, guid: bc99f5911eea13b419eb493e5ad01240, type: 3}
+  drag: 0
+  wrong: 0
+  _wrong: 0
 --- !u!114 &30216047611998784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,7 +191,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.027648926, y: 0.06295776}
+  m_Offset: {x: 0.027648926, y: 0.53648376}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -199,7 +202,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 97.83362, y: 106.24786}
+  m_Size: {x: 97.83362, y: 103.105865}
   m_EdgeRadius: 0
 --- !u!82 &-4961696958138471385
 AudioSource:
@@ -211,7 +214,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 957b3cc8c0c101d4c8cb23b613218b2f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: cf476e627cb882148b55f30e33326c60, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
